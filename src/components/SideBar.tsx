@@ -12,17 +12,12 @@ interface GenreResponseProps {
 }
 
 interface SideBarProps {
-  genreId: (id: number) => void;
+  handleClickButton: (id: number) => void;
+  selectedGenreId: number;
 }
 
-export function SideBar({ genreId }: SideBarProps) {
-  const [selectedGenreId, setSelectedGenreId] = useState(1);
+export function SideBar({ handleClickButton, selectedGenreId }: SideBarProps) {
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
-
-  function handleClickButton(id: number) {
-    setSelectedGenreId(id);
-    genreId(id);
-  }
 
   useEffect(() => {
     api.get<GenreResponseProps[]>("genres").then((response) => {
